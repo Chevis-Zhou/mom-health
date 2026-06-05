@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>妈妈的骨骼健康报告 · 2026年6月</title>
+<title>妈妈的健康报告</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,13 +20,9 @@
     --green:        #3F7A5A;
     --green-light:  #EAF5EF;
     --green-mid:    #BDE5CE;
-    --amber:        #B8720A;
-    --amber-light:  #FEF6E4;
-    --amber-border: #F0D38A;
     --violet:       #6B5FCF;
     --violet-light: #F0EDFC;
     --violet-border:#CEC8F0;
-    --bg:           #F4EFEA;
     --card:         #FFFFFF;
     --text:         #2D2020;
     --muted:        #8A7A70;
@@ -40,7 +36,6 @@
     padding-bottom: 56px;
   }
 
-  /* ─── Header ─── */
   .header {
     background: linear-gradient(160deg, #3F7A5A 0%, #255A3F 100%);
     color: #fff;
@@ -78,20 +73,19 @@
     letter-spacing: 2px;
     margin-bottom: 6px;
   }
-  .header-date {
-    font-size: 13px;
-    opacity: 0.65;
+  .header-sub {
+    font-size: 14px;
+    opacity: 0.7;
+    line-height: 1.6;
   }
 
-  /* ─── Body ─── */
   .body {
     padding: 0 14px;
     margin-top: -18px;
     position: relative;
   }
 
-  /* ─── Summary card ─── */
-  .summary-card {
+  .intro-card {
     background: var(--card);
     border-radius: 18px;
     padding: 28px 22px;
@@ -100,7 +94,7 @@
     margin-bottom: 28px;
     text-align: center;
   }
-  .summary-icon {
+  .intro-icon {
     width: 52px; height: 52px;
     background: var(--green-light);
     border-radius: 50%;
@@ -109,15 +103,12 @@
     justify-content: center;
     margin: 0 auto 16px;
   }
-  .summary-text {
-    font-size: 16px;
+  .intro-text {
+    font-size: 15.5px;
     color: var(--text);
     line-height: 1.9;
   }
-  .em { color: var(--green); font-weight: 700; }
 
-  /* ─── Section labels ─── */
-  .section-wrap { margin-bottom: 26px; }
   .section-label {
     font-size: 11.5px;
     font-weight: 700;
@@ -127,202 +118,80 @@
     margin-bottom: 12px;
     padding-left: 2px;
   }
+  .section-wrap { margin-bottom: 26px; }
 
-  /* ─── Good-news cards ─── */
-  .good-card {
-    background: linear-gradient(135deg, #F2FAF5, #E4F5EC);
-    border: 1.5px solid var(--green-mid);
-    border-radius: 14px;
-    padding: 18px 18px 16px;
-    margin-bottom: 10px;
-  }
-  .card-header {
+  /* ─── Report link cards ─── */
+  .report-link {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
+    gap: 16px;
+    padding: 18px 16px;
+    background: var(--card);
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.18s, box-shadow 0.18s;
+    -webkit-tap-highlight-color: transparent;
   }
-  .card-icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
+  .report-link:active { opacity: 0.75; }
+  .report-link:hover {
+    border-color: var(--green-mid);
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+
+  .rl-icon {
+    width: 44px; height: 44px; min-width: 44px;
+    border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
   }
-  .icon-green  { background: #C8E8D4; }
-  .icon-amber  { background: #F8E5B0; }
-  .card-title {
+  .rl-icon-bone   { background: linear-gradient(135deg, #E4F5EC, #D0EDDA); }
+  .rl-icon-digest { background: linear-gradient(135deg, #FEF4DA, #FCEAB8); }
+  .rl-icon-meta   { background: linear-gradient(135deg, #E8E4F8, #DDD6F5); }
+  .rl-icon-eye    { background: linear-gradient(135deg, #DCEEFB, #C8E2F5); }
+
+  .rl-content { flex: 1; min-width: 0; }
+  .rl-title {
     font-size: 15.5px;
     font-weight: 700;
+    color: var(--text);
     line-height: 1.3;
-  }
-  .good-card .card-title  { color: #1E5C3A; }
-  .attn-card .card-title  { color: #7A540A; }
-  .card-body {
-    font-size: 14.5px;
-    line-height: 1.75;
-    padding-left: 42px;
-  }
-  .good-card .card-body { color: #2D5A40; }
-  .attn-card .card-body { color: #6A4810; }
-
-  /* ─── Attention cards ─── */
-  .attn-card {
-    background: linear-gradient(135deg, #FFFBF0, #FEF4DA);
-    border: 1.5px solid var(--amber-border);
-    border-radius: 14px;
-    padding: 18px 18px 16px;
-    margin-bottom: 10px;
-  }
-
-  /* ─── Checklist ─── */
-  .group-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14.5px;
-    font-weight: 700;
-    color: var(--text);
-    margin: 18px 0 10px 2px;
-  }
-  .group-dot {
-    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-  }
-  .dot-green { background: var(--green); }
-  .dot-amber { background: var(--amber); }
-
-  .check-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 16px 16px 14px;
-    background: var(--card);
-    border-radius: 13px;
-    border: 1.5px solid var(--border);
-    margin-bottom: 9px;
-    cursor: pointer;
-    transition: background 0.18s, border-color 0.18s, opacity 0.18s;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-  }
-  .check-item:active { opacity: 0.75; }
-  .check-item.done {
-    background: var(--green-light);
-    border-color: var(--green-mid);
-  }
-
-  .circle {
-    width: 26px; height: 26px; min-width: 26px;
-    border-radius: 50%;
-    border: 2px solid #D0C0B8;
-    background: #fff;
-    display: flex; align-items: center; justify-content: center;
-    margin-top: 1px;
-    transition: background 0.18s, border-color 0.18s;
-  }
-  .check-item.done .circle {
-    background: var(--green);
-    border-color: var(--green);
-  }
-  .tick {
-    display: none;
-    width: 13px; height: 13px;
-  }
-  .check-item.done .tick { display: block; }
-
-  .ci-content { flex: 1; min-width: 0; }
-  .ci-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    line-height: 1.4;
     margin-bottom: 3px;
   }
-  .check-item.done .ci-title {
+  .rl-meta {
+    font-size: 12.5px;
     color: var(--muted);
-    text-decoration: line-through;
-    text-decoration-color: var(--green);
+    line-height: 1.5;
   }
-  .ci-desc {
-    font-size: 13.5px;
-    color: var(--muted);
-    line-height: 1.65;
-  }
-  .check-item.done .ci-desc { color: #B8A898; }
-
-  .tag {
+  .rl-version {
     display: inline-block;
-    padding: 2px 9px;
+    padding: 1px 7px;
     border-radius: 100px;
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 700;
-    margin-top: 7px;
-    letter-spacing: 0.5px;
+    background: var(--green-light);
+    color: var(--green);
+    margin-left: 6px;
+    vertical-align: 1px;
   }
-  .tag-free  { background: #E8F5E9; color: #2E7D32; }
-  .tag-buy   { background: #E3F2FD; color: #1565C0; }
-  .tag-send  { background: #FFF8E1; color: #E65100; }
-
-  /* ─── Letter card ─── */
-  .letter-card {
-    background: linear-gradient(160deg, var(--violet-light), #EBE7FA);
-    border: 1.5px solid var(--violet-border);
-    border-radius: 16px;
-    padding: 24px 20px;
-  }
-  .letter-from {
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--violet);
-    margin-bottom: 14px;
-  }
-  .letter-body {
-    font-size: 15.5px;
-    color: #3A306A;
-    line-height: 1.9;
-  }
-  .letter-body strong { color: var(--violet); }
-  .letter-sig {
-    margin-top: 18px;
-    text-align: right;
-    font-size: 15px;
-    color: var(--violet);
-    font-style: italic;
+  .rl-arrow {
+    flex-shrink: 0;
+    color: var(--muted);
+    opacity: 0.5;
   }
 
-  /* ─── Progress bar ─── */
-  .progress-wrap {
+  /* ─── Empty state ─── */
+  .empty-card {
+    padding: 20px 18px;
     background: var(--card);
-    border-radius: 13px;
-    border: 1.5px solid var(--border);
-    padding: 16px 18px;
-    margin-bottom: 28px;
-    box-shadow: 0 2px 10px var(--shadow);
-  }
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  .progress-text { font-size: 14px; font-weight: 600; color: var(--text); }
-  .progress-count { font-size: 14px; font-weight: 700; color: var(--green); }
-  .bar-bg {
-    height: 8px;
-    background: #EDE0D8;
-    border-radius: 100px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--green), #5FAF80);
-    border-radius: 100px;
-    transition: width 0.4s ease;
-    width: 0%;
+    border-radius: 14px;
+    border: 1.5px dashed var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
   }
 
-  /* ─── Footer ─── */
   .footer {
     text-align: center;
     font-size: 12px;
@@ -334,272 +203,66 @@
 <body>
 <div class="page">
 
-  <!-- Header -->
   <div class="header">
-    <div class="header-eyebrow">骨骼健康评估报告</div>
-    <div class="header-title">妈妈，你好！</div>
-    <div class="header-date">2026年6月 · 来自泽辰</div>
+    <div class="header-eyebrow">健康评估报告中心</div>
+    <div class="header-title">妈妈的健康报告</div>
+    <div class="header-sub">宸宸帮你整理的所有健康评估</div>
   </div>
 
   <div class="body">
 
-    <!-- Summary -->
-    <div class="summary-card">
-      <div class="summary-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div class="intro-card">
+      <div class="intro-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
-      <p class="summary-text">
-        上次打电话之后，我把你说的情况整理成了这份小报告。<br><br>
-        总体来说，<span class="em">你的骨骼状况比表格填的要好很多</span>——膝盖只是偶尔"咔嚓"一下，肩膀已经在好转。需要我们一起注意的，主要是几个小习惯。
+      <p class="intro-text">
+        这里是宸宸帮你整理的所有健康评估报告。<br>
+        每次采集完信息，我会把结果整理成一份新的报告放在这里。<br><br>
+        点进去就能看，做完的事情可以打钩。
       </p>
     </div>
 
-    <!-- Good news -->
+    <!-- ═══ 骨骼与关节 ═══ -->
     <div class="section-wrap">
-      <div class="section-label">好消息</div>
+      <div class="section-label">骨骼与关节</div>
 
-      <div class="good-card">
-        <div class="card-header">
-          <div class="card-icon icon-green">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <div class="card-title">膝盖：不是真的痛，放心</div>
+      <a class="report-link" href="bone-joint-v1.html">
+        <div class="rl-icon rl-icon-bone">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="card-body">
-          上楼时的"咔嚓"感是关节液不够润滑，不是骨头在磨损。这种情况很常见，半年内也没有加重——说明是早期，完全可以控制住。
+        <div class="rl-content">
+          <div class="rl-title">骨骼健康评估报告<span class="rl-version">v1</span></div>
+          <div class="rl-meta">2026年6月 · 膝关节、肩膀、摔倒风险、补剂建议</div>
         </div>
-      </div>
-
-      <div class="good-card">
-        <div class="card-header">
-          <div class="card-icon icon-green">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <div class="card-title">肩膀：自己就好转了</div>
+        <div class="rl-arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </div>
-        <div class="card-body">
-          原来是工位椅子太矮、手臂长期悬空造成的。现在多出门买菜做饭，症状明显减轻——说明身体自我恢复能力很好。
-        </div>
-      </div>
-
-      <div class="good-card">
-        <div class="card-header">
-          <div class="card-icon icon-green">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 15 14"/></svg>
-          </div>
-          <div class="card-title">摔倒风险：总体很低</div>
-        </div>
-        <div class="card-body">
-          走路稳、站起来不头晕、没有腿软——都是好信号。只有一个具体的地方要注意（见下方）。
-        </div>
-      </div>
+      </a>
     </div>
 
-    <!-- Attention -->
+    <!-- ═══ 消化系统 ═══ -->
     <div class="section-wrap">
-      <div class="section-label">需要关注</div>
-
-      <div class="attn-card">
-        <div class="card-header">
-          <div class="card-icon icon-amber">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8720A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <div class="card-title">氨糖要每天吃，不能断</div>
-        </div>
-        <div class="card-body">
-          氨糖需要连续吃3–6个月才有效，断断续续是没用的。需要在手机上设一个每天吃饭时的提醒闹钟。
-        </div>
-      </div>
-
-      <div class="attn-card">
-        <div class="card-header">
-          <div class="card-icon icon-amber">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8720A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <div class="card-title">钙片必须配维生素D才有效</div>
-        </div>
-        <div class="card-body">
-          这是最重要的一点！钙片如果没有搭配维生素D3，身体几乎吸收不了。维生素D3在国内很便宜，搜"汤臣倍健 维生素D3"就能找到，下面有具体建议。
-        </div>
-      </div>
-
-      <div class="attn-card">
-        <div class="card-header">
-          <div class="card-icon icon-amber">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8720A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <div class="card-title">拖地后的地板很滑</div>
-        </div>
-        <div class="card-body">
-          之前在客厅滑倒那次就是湿地板。规则很简单：拖完地等5分钟，或者换上防滑拖鞋再走过去。
-        </div>
-      </div>
+      <div class="section-label">消化系统</div>
+      <div class="empty-card">还没有报告，采集完信息后会出现在这里</div>
     </div>
 
-    <!-- Progress -->
-    <div class="progress-wrap">
-      <div class="progress-label">
-        <span class="progress-text">行动清单完成进度</span>
-        <span class="progress-count" id="progress-count">0 / 8</span>
-      </div>
-      <div class="bar-bg">
-        <div class="bar-fill" id="bar-fill"></div>
-      </div>
+    <!-- ═══ 代谢与血脂 ═══ -->
+    <div class="section-wrap">
+      <div class="section-label">代谢与血脂</div>
+      <div class="empty-card">还没有报告，采集完信息后会出现在这里</div>
     </div>
 
-    <!-- Checklist -->
+    <!-- ═══ 视力与眼科 ═══ -->
     <div class="section-wrap">
-      <div class="section-label">行动清单</div>
-      <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px;padding-left:2px;">点一下就能打钩，做了就勾掉 ✓</p>
-
-      <div class="group-title">
-        <div class="group-dot dot-green"></div>
-        这周马上可以做（不花钱）
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c1">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">设氨糖提醒闹钟</div>
-          <div class="ci-desc">手机 → 时钟 → 新增闹钟 → 每天固定饭点 → 备注"吃氨糖"。</div>
-          <span class="tag tag-free">免费</span>
-        </div>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c2">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">每天出去晒15分钟太阳</div>
-          <div class="ci-desc">阳光照到皮肤，是最天然的维生素D。早晨或傍晚散步都行，不用直晒。</div>
-          <span class="tag tag-free">免费</span>
-        </div>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c3">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">做饭时多加芝麻 / 芝麻酱</div>
-          <div class="ci-desc">两勺芝麻酱 ≈ 180mg 钙。拌面、凉菜、稀饭都可以放。你不喝牛奶，芝麻是最好的饮食补钙替代。</div>
-          <span class="tag tag-free">食材</span>
-        </div>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c4">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">拖地后穿防滑拖鞋再走</div>
-          <div class="ci-desc">不用买新的，现有软底拖鞋就够用。养成习惯就行。</div>
-          <span class="tag tag-free">免费</span>
-        </div>
-      </div>
-
-      <div class="group-title" style="margin-top:20px;">
-        <div class="group-dot dot-amber"></div>
-        这个月要做（少量花钱）
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c5">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">买维生素D3（最重要！）</div>
-          <div class="ci-desc">淘宝搜：汤臣倍健 维生素D3，或善存 钙加D。每天1粒（1000–2000 IU）。约¥30–60，够吃3个月。</div>
-          <span class="tag tag-buy">¥30–60</span>
-        </div>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c6">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">拍照发我：所有卫生间 + 厕所地面</div>
-          <div class="ci-desc">让我帮你分析哪里需要防滑垫或扶手，你只需要拍照发微信，我来看。</div>
-          <span class="tag tag-send">发微信</span>
-        </div>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c7">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">把旧体检本子拍照发我</div>
-          <div class="ci-desc">3–5年前的那个体检记录本。让我帮你看看之前的骨密度和血脂数值作为对比。</div>
-          <span class="tag tag-send">发微信</span>
-        </div>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-id="c8">
-        <div class="circle">
-          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="ci-content">
-          <div class="ci-title">预约基础体检 + 骨密度检查</div>
-          <div class="ci-desc">社区卫生中心或医院都可以。骨密度（DEXA）就是拍个片子，不痛不抽血，几分钟，¥100–300。做了才知道真实情况。</div>
-          <span class="tag tag-buy">¥200–500</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Letter -->
-    <div class="section-wrap">
-      <div class="letter-card">
-        <div class="letter-from">来自泽辰</div>
-        <div class="letter-body">
-          妈，你做的已经很好了——氨糖是你自己主动发现、主动开始吃的，说明你对自己健康是认真负责的。<br><br>
-          我整理这份报告，是希望你能把精力放在最重要的几件事上，不用担心那些不严重的问题。<br><br>
-          最重要的就两件事：<strong>氨糖每天按时吃</strong>，<strong>加上维生素D3</strong>。其他的慢慢来。<br><br>
-          有什么不清楚的，随时微信我。
-        </div>
-        <div class="letter-sig">— 泽辰</div>
-      </div>
+      <div class="section-label">视力与眼科</div>
+      <div class="empty-card">还没有报告，采集完信息后会出现在这里</div>
     </div>
 
   </div>
 
   <div class="footer">
-    骨骼健康评估报告 · 2026年6月 · 由泽辰整理
+    健康评估报告中心 · 由宸宸整理维护
   </div>
 </div>
-
-<script>
-  var TOTAL = 8;
-
-  // Init from localStorage
-  document.querySelectorAll('.check-item').forEach(function(el) {
-    if (localStorage.getItem('mh_' + el.dataset.id) === '1') {
-      el.classList.add('done');
-    }
-  });
-  updateBar();
-
-  function toggle(el) {
-    el.classList.toggle('done');
-    var id = el.dataset.id;
-    if (el.classList.contains('done')) {
-      localStorage.setItem('mh_' + id, '1');
-    } else {
-      localStorage.removeItem('mh_' + id);
-    }
-    updateBar();
-  }
-
-  function updateBar() {
-    var done = document.querySelectorAll('.check-item.done').length;
-    var pct = Math.round((done / TOTAL) * 100);
-    document.getElementById('bar-fill').style.width = pct + '%';
-    document.getElementById('progress-count').textContent = done + ' / ' + TOTAL;
-  }
-</script>
 </body>
 </html>
