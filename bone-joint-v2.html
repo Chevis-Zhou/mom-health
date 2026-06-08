@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>妈妈的骨骼健康报告 · 2026年6月（v2）</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
+    background: #F4EFEA;
+    color: #2D2020;
+    line-height: 1.75;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :root {
+    --green:        #3F7A5A;
+    --green-light:  #EAF5EF;
+    --green-mid:    #BDE5CE;
+    --amber:        #B8720A;
+    --amber-light:  #FEF6E4;
+    --amber-border: #F0D38A;
+    --violet:       #6B5FCF;
+    --violet-light: #F0EDFC;
+    --violet-border:#CEC8F0;
+    --bg:           #F4EFEA;
+    --card:         #FFFFFF;
+    --text:         #2D2020;
+    --muted:        #8A7A70;
+    --border:       #EDE0D8;
+    --shadow:       rgba(60,30,10,0.07);
+  }
+
+  .page {
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 56px;
+  }
+
+  /* ─── Header ─── */
+  .header {
+    background: linear-gradient(160deg, #3F7A5A 0%, #255A3F 100%);
+    color: #fff;
+    padding: 52px 28px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -24px; left: -24px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .header-eyebrow {
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 10px;
+  }
+  .header-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .header-date {
+    font-size: 13px;
+    opacity: 0.65;
+  }
+
+  .back-link {
+    position: absolute;
+    top: 18px; left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    z-index: 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .back-link:active { opacity: 0.5; }
+
+  /* ─── Body ─── */
+  .body {
+    padding: 0 14px;
+    margin-top: -18px;
+    position: relative;
+  }
+
+  /* ─── Summary card ─── */
+  .summary-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 28px 22px;
+    box-shadow: 0 4px 22px var(--shadow);
+    border: 1px solid var(--border);
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .summary-icon {
+    width: 52px; height: 52px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .summary-text {
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.9;
+  }
+  .em { color: var(--green); font-weight: 700; }
+
+  /* ─── Section labels ─── */
+  .section-wrap { margin-bottom: 26px; }
+  .section-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+    padding-left: 2px;
+  }
+
+  /* ─── Good-news cards ─── */
+  .good-card {
+    background: linear-gradient(135deg, #F2FAF5, #E4F5EC);
+    border: 1.5px solid var(--green-mid);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 10px;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .card-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-green  { background: #C8E8D4; }
+  .icon-amber  { background: #F8E5B0; }
+  .card-title {
+    font-size: 15.5px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .good-card .card-title  { color: #1E5C3A; }
+  .attn-card .card-title  { color: #7A540A; }
+  .card-body {
+    font-size: 14.5px;
+    line-height: 1.75;
+    padding-left: 42px;
+  }
+  .good-card .card-body { color: #2D5A40; }
+  .attn-card .card-body { color: #6A4810; }
+
+  /* ─── Attention cards ─── */
+  .attn-card {
+    background: linear-gradient(135deg, #FFFBF0, #FEF4DA);
+    border: 1.5px solid var(--amber-border);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    margin-bottom: 10px;
+  }
+
+  /* ─── Checklist ─── */
+  .group-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 18px 0 10px 2px;
+  }
+  .group-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-green { background: var(--green); }
+  .dot-amber { background: var(--amber); }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 16px 14px;
+    background: var(--card);
+    border-radius: 13px;
+    border: 1.5px solid var(--border);
+    margin-bottom: 9px;
+    cursor: pointer;
+    transition: background 0.18s, border-color 0.18s, opacity 0.18s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .check-item:active { opacity: 0.75; }
+  .check-item.done {
+    background: var(--green-light);
+    border-color: var(--green-mid);
+  }
+
+  .circle {
+    width: 26px; height: 26px; min-width: 26px;
+    border-radius: 50%;
+    border: 2px solid #D0C0B8;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+    transition: background 0.18s, border-color 0.18s;
+  }
+  .check-item.done .circle {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .tick {
+    display: none;
+    width: 13px; height: 13px;
+  }
+  .check-item.done .tick { display: block; }
+
+  .ci-content { flex: 1; min-width: 0; }
+  .ci-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 3px;
+  }
+  .check-item.done .ci-title {
+    color: var(--muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--green);
+  }
+  .ci-desc {
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+  .check-item.done .ci-desc { color: #B8A898; }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 7px;
+    letter-spacing: 0.5px;
+  }
+  .tag-free  { background: #E8F5E9; color: #2E7D32; }
+  .tag-buy   { background: #E3F2FD; color: #1565C0; }
+  .tag-send  { background: #FFF8E1; color: #E65100; }
+
+  /* ─── Done-banner (closes the loop on v1 asks) ─── */
+  .done-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--green-light);
+    border: 1.5px solid var(--green-mid);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+  }
+  .done-banner-icon {
+    width: 34px; height: 34px; min-width: 34px;
+    border-radius: 50%;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .done-banner-text {
+    font-size: 13.5px;
+    color: #2D5A40;
+    line-height: 1.6;
+  }
+  .done-banner-text strong { color: #1E5C3A; }
+
+  /* ─── Letter card ─── */
+  .letter-card {
+    background: linear-gradient(160deg, var(--violet-light), #EBE7FA);
+    border: 1.5px solid var(--violet-border);
+    border-radius: 16px;
+    padding: 24px 20px;
+  }
+  .letter-from {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 14px;
+  }
+  .letter-body {
+    font-size: 15.5px;
+    color: #3A306A;
+    line-height: 1.9;
+  }
+  .letter-body strong { color: var(--violet); }
+  .letter-sig {
+    margin-top: 18px;
+    text-align: right;
+    font-size: 15px;
+    color: var(--violet);
+    font-style: italic;
+  }
+
+  /* ─── Progress bar ─── */
+  .progress-wrap {
+    background: var(--card);
+    border-radius: 13px;
+    border: 1.5px solid var(--border);
+    padding: 16px 18px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 10px var(--shadow);
+  }
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .progress-text { font-size: 14px; font-weight: 600; color: var(--text); }
+  .progress-count { font-size: 14px; font-weight: 700; color: var(--green); }
+  .bar-bg {
+    height: 8px;
+    background: #EDE0D8;
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green), #5FAF80);
+    border-radius: 100px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ─── Footer ─── */
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 28px 16px 0;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <a class="back-link" href="index.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      全部报告
+    </a>
+    <div class="header-eyebrow">骨骼健康评估报告 · v2</div>
+    <div class="header-title">妈妈，你好！</div>
+    <div class="header-date">2026年6月 · 来自宸宸</div>
+  </div>
+
+  <div class="body">
+
+    <!-- Summary -->
+    <div class="summary-card">
+      <div class="summary-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <p class="summary-text">
+        谢谢你把卫生间和补剂的照片都拍给我了！我对着照片仔细看了一遍——<span class="em">这次比上次说得更准</span>，因为不用再靠猜，能直接看到具体是哪里需要改、怎么改最简单。
+      </p>
+    </div>
+
+    <!-- Closes the loop on v1's "send me photos" asks -->
+    <div class="done-banner">
+      <div class="done-banner-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="done-banner-text">
+        <strong>你上次让做的两件事都完成啦</strong> —— 卫生间照片 ✓，体检本子 ✓。这份报告和后面的发现，都是照着这些照片做出来的。
+      </div>
+    </div>
+
+    <!-- Good news -->
+    <div class="section-wrap">
+      <div class="section-label">好消息</div>
+
+      <div class="good-card">
+        <div class="card-header">
+          <div class="card-icon icon-green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="card-title">膝盖、肩膀：和上次说的一样，没有变化</div>
+        </div>
+        <div class="card-body">
+          膝盖偶尔"咔嚓"一下还是关节液不够润滑，不是骨头磨损；肩膀也继续在好转。这两个都还是早期的小问题，跟着氨糖和拉伸慢慢来就行。
+        </div>
+      </div>
+
+      <div class="good-card">
+        <div class="card-header">
+          <div class="card-icon icon-green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="card-title">浴室到底哪里危险——现在看明白了</div>
+        </div>
+        <div class="card-body">
+          之前只知道"地滑会摔倒"，但具体哪里、为什么，说不清楚。现在看了照片，<span class="em">其实就是3个地方叠在一起</span>，而且每一个都有简单又不贵的解决办法（详细在下面）。说清楚了反而是好事——从"不知道哪里会出事"变成"知道怎么让它不出事"。
+        </div>
+      </div>
+    </div>
+
+    <!-- Attention -->
+    <div class="section-wrap">
+      <div class="section-label">需要关注</div>
+
+      <div class="attn-card">
+        <div class="card-header">
+          <div class="card-icon icon-amber">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8720A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="card-title">浴室有3个地方，凑在一起最容易滑</div>
+        </div>
+        <div class="card-body">
+          瓷砖比较亮、比较滑；淋浴和外面之间没有挡水的门槛，水会流到外面；整个浴室没有一根能扶的杆子。这3个凑在一起，就是让人容易滑倒的真正原因——好消息是，这3个都不难改，清单里第一批就能搞定大半。
+        </div>
+      </div>
+
+      <div class="attn-card">
+        <div class="card-header">
+          <div class="card-icon icon-amber">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8720A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="card-title">你拍的那瓶钙锌口服液，建议再加一瓶搭档</div>
+        </div>
+        <div class="card-body">
+          照片看清楚了——那瓶"葡萄糖酸钙锌口服液"其实定位更偏向小孩子，里面的钙含量比较低，一支可能不够你身体需要的量。不是说它不好，可以继续吃，但<span class="em">最好再买一瓶专门给成年人吃的钙片（搭配维生素D3）</span>，两个一起吃，一个顾肠胃舒服，一个顾真正补够钙。
+        </div>
+      </div>
+
+      <div class="attn-card">
+        <div class="card-header">
+          <div class="card-icon icon-amber">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B8720A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="card-title">氨糖还是要每天吃，别断</div>
+        </div>
+        <div class="card-body">
+          这点和上次说的一样——氨糖得连着吃3-6个月才有用，断断续续基本等于白吃。如果手机闹钟还没设上，这周就设一个，吃饭时间提醒最顺手。
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span class="progress-text">行动清单完成进度</span>
+        <span class="progress-count" id="progress-count">0 / 8</span>
+      </div>
+      <div class="bar-bg">
+        <div class="bar-fill" id="bar-fill"></div>
+      </div>
+    </div>
+
+    <!-- Checklist -->
+    <div class="section-wrap">
+      <div class="section-label">行动清单</div>
+      <p style="font-size:13.5px;color:var(--muted);margin-bottom:14px;padding-left:2px;">点一下就能打钩，做了就勾掉 ✓</p>
+
+      <div class="group-title">
+        <div class="group-dot dot-green"></div>
+        这周就能做（不花钱或者很便宜）
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c1">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">设氨糖提醒闹钟</div>
+          <div class="ci-desc">手机 → 时钟 → 新增闹钟 → 每天固定饭点 → 备注"吃氨糖"。</div>
+          <span class="tag tag-free">免费</span>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c2">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">买一张防滑垫，放在淋浴出口</div>
+          <div class="ci-desc">放在你出淋浴、走向蹲便器那条必经的路上，湿脚踩上去不打滑。某宝搜"浴室防滑垫"就有。</div>
+          <span class="tag tag-buy">¥20–50</span>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c3">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">弄一条挡水条，挡住玻璃隔断下面的缝</div>
+          <div class="ci-desc">贴在玻璃隔断和地面之间，水就不会流到外面的干燥区域。某宝搜"淋浴房挡水条"，自己就能粘，不用找人装。</div>
+          <span class="tag tag-buy">¥20–40</span>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c4">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">浴室门口固定放一双专用防滑拖鞋</div>
+          <div class="ci-desc">挑鞋底有纹路、抓地的那种（不是普通棉拖鞋）。固定放浴室门口，进出都换上，慢慢就成习惯了。</div>
+          <span class="tag tag-free">免费</span>
+        </div>
+      </div>
+
+      <div class="group-title" style="margin-top:20px;">
+        <div class="group-dot dot-amber"></div>
+        这个月安排一下（要买点东西/找人帮忙）
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c5">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">换一张带橡胶脚垫的防滑淋浴凳</div>
+          <div class="ci-desc">你现在用的小凳子底部是光的，湿地上自己会滑走。换一张专门给浴室用、带橡胶防滑脚垫的，坐着洗会更稳当。</div>
+          <span class="tag tag-buy">¥50–100</span>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c6">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">在马桶和淋浴边上各装一根扶手</div>
+          <div class="ci-desc"><strong>这是这次最重要的一件事。</strong>一定要选固定式、钉墙上的那种——吸盘式的在瓷砖上承重容易突然脱落，反而更危险。可以找小区维修师傅或某宝师傅上门安装，材料加人工大概这个价。</div>
+          <span class="tag tag-buy">¥200–400</span>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c7">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">买一瓶成人钙片+维生素D3</div>
+          <div class="ci-desc">某宝搜"柠檬酸钙 维生素D3"，每天1粒。和你现在吃的钙锌口服液不冲突，是互相补充——一个顾肠胃舒服，一个顾真正补够钙量，两个搭配着吃就对了。</div>
+          <span class="tag tag-buy">¥40–80</span>
+        </div>
+      </div>
+
+      <div class="check-item" onclick="toggle(this)" data-id="c8">
+        <div class="circle">
+          <svg class="tick" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="ci-content">
+          <div class="ci-title">约个时间做基础体检 + 骨密度检查</div>
+          <div class="ci-desc">距离上次体检已经两年多了，该排上日程。社区医院就能约，骨密度（DEXA）就是拍张片子，不疼不抽血，几分钟搞定，正好心里有个数。</div>
+          <span class="tag tag-buy">¥200–500</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter -->
+    <div class="section-wrap">
+      <div class="letter-card">
+        <div class="letter-from">来自宸宸</div>
+        <div class="letter-body">
+          妈，先说谢谢——卫生间和补剂的照片你都拍给我了，这帮了大忙。有照片我就不用瞎猜，能直接说清楚哪里要改、改哪里最划算。<br><br>
+          这次最要紧的就两件事：<strong>浴室装一根扶手</strong>（花小钱、解决大问题），<strong>再配一瓶成人钙片</strong>（你现在吃的那瓶留着，只是再搭一个伴）。剩下的慢慢来，不用一口气都做完。<br><br>
+          有什么吃不准的，随时拍照片给我看——我看图比听描述更准。
+        </div>
+        <div class="letter-sig">— 宸宸</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    骨骼健康评估报告 v2 · 2026年6月 · 由宸宸整理
+  </div>
+</div>
+
+<script>
+  var SLUG = 'bone-joint-v2';
+  var TOTAL = 8;
+
+  document.querySelectorAll('.check-item').forEach(function(el) {
+    if (localStorage.getItem('mh_' + SLUG + '_' + el.dataset.id) === '1') {
+      el.classList.add('done');
+    }
+  });
+  updateBar();
+
+  function toggle(el) {
+    el.classList.toggle('done');
+    var id = el.dataset.id;
+    if (el.classList.contains('done')) {
+      localStorage.setItem('mh_' + SLUG + '_' + id, '1');
+    } else {
+      localStorage.removeItem('mh_' + SLUG + '_' + id);
+    }
+    updateBar();
+  }
+
+  function updateBar() {
+    var done = document.querySelectorAll('.check-item.done').length;
+    var pct = Math.round((done / TOTAL) * 100);
+    document.getElementById('bar-fill').style.width = pct + '%';
+    document.getElementById('progress-count').textContent = done + ' / ' + TOTAL;
+  }
+</script>
+</body>
+</html>
