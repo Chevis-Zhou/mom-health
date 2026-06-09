@@ -181,6 +181,77 @@
     opacity: 0.5;
   }
 
+  /* ─── Form status cards ─── */
+  .form-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    background: var(--card);
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    margin-bottom: 10px;
+    transition: box-shadow 0.18s;
+  }
+  .form-card.done {
+    border-left: 4px solid var(--green);
+    background: var(--green-light);
+    border-color: var(--green-mid);
+  }
+  .form-card.pending {
+    border-left: 4px solid #C49A1A;
+    cursor: pointer;
+  }
+  .form-card.pending:hover {
+    box-shadow: 0 3px 14px var(--shadow);
+  }
+  .form-card-icon {
+    width: 38px; height: 38px; min-width: 38px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fc-icon-done    { background: #D4F0DF; }
+  .fc-icon-pending { background: #FFF4D4; }
+  .form-card-body { flex: 1; min-width: 0; }
+  .form-card-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+  .form-card-meta {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .form-status-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 10.5px;
+    font-weight: 700;
+    margin-top: 5px;
+  }
+  .badge-done    { background: var(--green-light); color: var(--green); border: 1px solid var(--green-mid); }
+  .badge-pending { background: #FFF4D4; color: #9A7010; border: 1px solid #E8D08A; }
+  .form-fill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: #C49A1A;
+    color: #fff;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 700;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 0.15s;
+  }
+  .form-fill-btn:active { opacity: 0.75; }
+
   /* ─── Empty state ─── */
   .empty-card {
     padding: 20px 18px;
@@ -220,6 +291,57 @@
         每次采集完信息，我会把结果整理成一份新的报告放在这里。<br><br>
         点进去就能看，做完的事情可以打钩。
       </p>
+    </div>
+
+    <!-- ═══ 健康问卷状态 ═══ -->
+    <div class="section-wrap">
+      <div class="section-label">健康问卷</div>
+
+      <!-- 骨骼健康 — 已完成 -->
+      <div class="form-card done">
+        <div class="form-card-icon fc-icon-done">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="form-card-body">
+          <div class="form-card-title">骨骼与关节健康评估</div>
+          <div class="form-card-meta">宸宸已收到回复，报告已生成</div>
+          <span class="form-status-badge badge-done">已完成</span>
+        </div>
+      </div>
+
+      <!-- 消化系统 — 待填写 -->
+      <div class="form-card pending">
+        <div class="form-card-icon fc-icon-pending">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A7010" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="form-card-body">
+          <div class="form-card-title">消化系统健康问卷</div>
+          <div class="form-card-meta">宸宸已发送，还没有收到回复</div>
+          <span class="form-status-badge badge-pending">待填写</span>
+          <br>
+          <a class="form-fill-btn" href="https://chevis-zhou.github.io/family-health-forms/health-intake-form-03-digestion.html">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            点击填写
+          </a>
+        </div>
+      </div>
+
+      <!-- 代谢综合 — 待填写 -->
+      <div class="form-card pending">
+        <div class="form-card-icon fc-icon-pending">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9A7010" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="form-card-body">
+          <div class="form-card-title">代谢与血脂健康问卷</div>
+          <div class="form-card-meta">宸宸已发送，还没有收到回复</div>
+          <span class="form-status-badge badge-pending">待填写</span>
+          <br>
+          <a class="form-fill-btn" href="https://chevis-zhou.github.io/family-health-forms/health-intake-form-04-dad-metabolic.html">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            点击填写
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- ═══ 骨骼与关节 ═══ -->
@@ -270,9 +392,12 @@
   </div>
 
   <div class="footer">
-    <div style="margin-bottom: 12px;">
-      <a href="https://chevis-zhou.github.io/family-health-forms/index.html" style="display:inline-block; padding:8px 16px; background:var(--green-light); color:var(--green); border-radius:20px; text-decoration:none; font-weight:600; font-size:13px; border:1px solid var(--green-mid);">
-        切换到：爸爸的健康档案 👉
+    <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">
+      <a href="https://chevis-zhou.github.io/family-health-forms/chevis.html" style="display:inline-block; padding:8px 14px; background:var(--green-light); color:var(--green); border-radius:20px; text-decoration:none; font-weight:600; font-size:13px; border:1px solid var(--green-mid);">
+        👈 宸宸的健康快照
+      </a>
+      <a href="https://chevis-zhou.github.io/family-health-forms/index.html" style="display:inline-block; padding:8px 14px; background:var(--green-light); color:var(--green); border-radius:20px; text-decoration:none; font-weight:600; font-size:13px; border:1px solid var(--green-mid);">
+        爸爸的健康档案 👉
       </a>
     </div>
     健康评估报告中心 · 由宸宸整理维护
