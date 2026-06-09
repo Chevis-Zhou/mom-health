@@ -197,7 +197,12 @@
     border-left: 4px solid var(--green);
     background: var(--green-light);
     border-color: var(--green-mid);
+    opacity: 0.62;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
   }
+  .form-card.done:active { opacity: 0.4; }
   .form-card.pending {
     border-left: 4px solid #C49A1A;
     cursor: pointer;
@@ -298,7 +303,7 @@
       <div class="section-label">健康问卷</div>
 
       <!-- 骨骼健康 — 已完成 -->
-      <div class="form-card done">
+      <a class="form-card done" href="bone-joint-v2.html">
         <div class="form-card-icon fc-icon-done">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3F7A5A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
@@ -307,7 +312,10 @@
           <div class="form-card-meta">宸宸已收到回复，报告已生成</div>
           <span class="form-status-badge badge-done">已完成</span>
         </div>
-      </div>
+        <div style="flex-shrink:0; color:var(--muted); opacity:0.5; align-self:center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </a>
 
       <!-- 消化系统 — 待填写 -->
       <div class="form-card pending">
